@@ -9,7 +9,10 @@ void qwerty(const int threads, const int* array, const unsigned int count)
     #pragma omp parallel num_threads(threads) reduction(max: max) private(i)
     {
         #pragma omp for
-        for (i = 0; i < count; ++i) if (array[i] > max) max = array[i];
+        for (i = 0; i < count; ++i) {
+            if (array[i] > max) max = array[i];
+            std::cout << omp_get_thread_num() << ' ';
+        }
     }
 }
 
@@ -27,10 +30,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < 10 * c; i++) *((unsigned int*)(arr)+i) = i;
 
     for (int th = 1; th <= 16; ++th)
-        for (int i = 0; i < 10; ++i) {
-            qwerty(th, arr + i * c, c);
-            std::cout << omp_get_thread_num() << ' ';
-        }
+        for (int i = 0; i < 10; ++i) qwerty(th, arr + i * c, c);
 
     free(arr);
     end = omp_get_wtime();
