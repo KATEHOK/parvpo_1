@@ -19,6 +19,8 @@ int main(int argc, char** argv)
     const unsigned int c = 100000000;
     start = omp_get_wtime();
 
+    std::cout << omp_get_num_procs() << std::endl;
+
     int* arr = (int*)malloc(10 * c * sizeof(int));
     if (arr == NULL) return 1;
 
