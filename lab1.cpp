@@ -1,7 +1,6 @@
-﻿#define _CRT_RAND_S
-#include <stdlib.h>
-#include <omp.h>
+﻿#include <omp.h>
 #include <iostream>
+#include <ctime>
 
 void qwerty(const int threads, const int* array, const unsigned int count)
 {
@@ -23,7 +22,7 @@ int main(int argc, char** argv)
     int* arr = (int*)malloc(10 * c * sizeof(int));
     if (arr == NULL) return 1;
 
-    for (int i = 0; i < 10 * c; i++) rand_s((unsigned int*)(arr)+i);
+    for (int i = 0; i < 10 * c; i++) *((unsigned int*)(arr)+i) = i;
 
     for (int th = 1; th <= 16; ++th)
         for (int i = 0; i < 10; ++i) qwerty(th, arr + i * c, c);
