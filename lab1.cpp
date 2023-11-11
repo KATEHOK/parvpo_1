@@ -6,14 +6,17 @@ void qwerty(const int threads, const int* array, const unsigned int count)
 {
     int max = -1;
     int i;
+    float start, end;
+    start = omp_get_wtime();
     #pragma omp parallel num_threads(threads) reduction(max: max) private(i)
     {
         #pragma omp for
         for (i = 0; i < count; ++i) {
             if (array[i] > max) max = array[i];
-            // std::cout << omp_get_thread_num() << ' ';
         }
     }
+    end = omp_get_wtime();
+    std::cout << std::endl << end - start;
 }
 
 int main(int argc, char** argv)
