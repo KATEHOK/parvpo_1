@@ -11,7 +11,7 @@ void qwerty(const int threads, const int* array, const unsigned int count)
         #pragma omp for
         for (i = 0; i < count; ++i) {
             if (array[i] > max) max = array[i];
-            std::cout << omp_get_thread_num() << ' ';
+            // std::cout << omp_get_thread_num() << ' ';
         }
     }
 }
