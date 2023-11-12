@@ -6,8 +6,8 @@ void qwerty(const int threads, const int* array, const unsigned int count)
 {
     int max = -1;
     int i;
-    float start, end;
-    start = omp_get_wtime();
+    // float start, end;
+    // start = omp_get_wtime();
     #pragma omp parallel num_threads(threads) reduction(max: max) private(i)
     {
         #pragma omp for
@@ -15,8 +15,8 @@ void qwerty(const int threads, const int* array, const unsigned int count)
             if (array[i] > max) max = array[i];
         }
     }
-    end = omp_get_wtime();
-    std::cout << std::endl << end - start;
+    // end = omp_get_wtime();
+    // std::cout << std::endl << end - start;
 }
 
 int main(int argc, char** argv)
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     float start, end;
     const unsigned int c = 100000000;
     start = omp_get_wtime();
-    std::cout << _OPENMP << " Threads: " << omp_get_num_procs() << std::endl;
+    // std::cout << _OPENMP << " Threads: " << omp_get_num_procs() << std::endl;
 
     int* arr = (int*)malloc(10 * c * sizeof(int));
     if (arr == NULL) return 1;
@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 
     free(arr);
     end = omp_get_wtime();
-    std::cout << std::endl << end - start;
+    std::cout << end - start;
 
 	return 0;
 }
