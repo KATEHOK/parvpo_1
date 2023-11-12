@@ -32,7 +32,8 @@ int main(int argc, char** argv)
     for (int i = 0; i < 10 * c; i++) *((unsigned int*)(arr)+i) = i;
 
     for (int th = 1; th <= 16; ++th)
-        for (int i = 0; i < 10; ++i) qwerty(th, arr + i * c, c);
+        for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 10; ++i) qwerty(16, arr + i * c, c);
 
     free(arr);
     end = omp_get_wtime();
